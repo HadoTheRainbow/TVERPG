@@ -1,0 +1,13 @@
+[
+"Ignore",
+["name", "hp", "atk", "def", "spd", "mag", ["resistances"], ["immunities"], ["vulnerabilities"], "special id", ["skills (enemes only)"]],
+"Heroes",
+["Kat", 74, 7, 22, 28, 3, ["physical"], ["none"], ["void"], 1],
+["Red", 87, 4, 30, 20, 4, ["soul"], ["poison"], ["water", "sonic"], 2],
+["Yeet", 68, 5, 23, 26, 8, ["fire"], ["none"], ["water"], 3],
+["Cor", 94, 3, 34, 25, 7, ["physical"], ["none"], ["void"], 4],
+"Enemies",
+["Skeleton Warrior", 45, 5, 15, 21, ["poison"], ["none"], ["fire", "radiant"], 0, [2, 3, 4]],
+["Skeleton Warrior", 45, 5, 15, 21, ["poison"], ["none"], ["fire", "radiant"], 0, [2, 3, 3]],
+"Bosses"
+]
