@@ -2,6 +2,7 @@ extends Node
 
 class_name Character_cust
 
+var skill_name_dict = SkillsDict.new()
 
 var id: int
 var lvl: int
@@ -17,7 +18,13 @@ var is_hero: bool
 var resistances = [1,1,1,1,1,1,1,1,1,1,1,1]
 var default_normal_type = 0
 var type_override = -1
-var skills = []
+var skills = [
+	skill_name_dict.character_list["Normal"], 
+	skill_name_dict.character_list["Special"], 
+	skill_name_dict.character_list["Hit"], 
+	skill_name_dict.character_list["FlameBlade"], 
+	skill_name_dict.character_list["Heal"]
+	]
 
 var stats_reference = {
 	"hp": hp,
@@ -68,6 +75,10 @@ func get_stat(a):
 	
 	}
 	return stats_reference[a]
+	
+func get_all_attack_stats():
+	print([char_name, max_hp, attack, defense, speed, magic])
+	return [char_name, max_hp, attack, defense, speed, magic]
 
 func apply_level(value,level,level_scaling) -> int:
 	return int(value*(level_scaling**(level-1)))
@@ -106,9 +117,9 @@ class SkeletonGeneric:
 	func _init():
 		id = 0
 		char_name = "Skeleton"
-		hp = 30
-		max_hp = 30
-		attack = 4
+		hp = 60
+		max_hp = 60
+		attack = 18
 		defense = 11
 		speed = 14
 		magic = 2
@@ -125,9 +136,9 @@ class FireSlime:
 	func _init():
 		id = 0
 		char_name = "Fire Slime"
-		hp = 20
-		max_hp = 20
-		attack = 4
+		hp = 45
+		max_hp = 45
+		attack = 12
 		defense = 7
 		speed = 16
 		magic = 2
@@ -138,8 +149,9 @@ class FireSlime:
 		hp = max_hp
 		type_override = 1
 		skills = [
-			"Gelfire"
-			
+			skill_name_dict.character_list["Normal"], 
+			skill_name_dict.character_list["Blaze"], 
+			skill_name_dict.character_list["FlameBlade"], 
 			
 		]
 		
@@ -159,7 +171,7 @@ class StormPrincess:
 		magic = 21
 		status_effects = []
 		for i in resistances.size():
-			resistances[i] = -99.00
+			resistances[i] = 0.50
 		max_hp = max_hp
 		hp = max_hp
 		type_override = 12

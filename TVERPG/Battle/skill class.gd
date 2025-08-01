@@ -46,14 +46,15 @@ var crit_mod
 var crit_d_mod
 
 func call_skill(stats):
+	trigger_cooldown()
 	if effects.size() == 0:
-		return value * stats[attack_scale]
+		return [value * stats[attack_scale], damage_type]
 	else:
-		var arr = [value * stats[attack_scale]]
+		var arr = [value * stats[attack_scale], damage_type]
 		export_effects = []
 		for i in effects:
 			export_effects.append(roll_effect(i,0))
-		arr.append_array(export_effects)
+		arr.append(export_effects)
 		return arr
 		
 func roll_effect(data, modifier):
@@ -63,7 +64,8 @@ func roll_effect(data, modifier):
 	
 func energy_change(v):
 	energy_remain -= v
-	
+	if energy_remain < 0:
+		energy_remain = 0
 func trigger_cooldown():
 	energy_remain = cooldown
 	
@@ -87,6 +89,26 @@ class FlameBlade:
 		effects = []
 		cooldown = 2
 		
+class DefaultHit:
+	extends Skill
+	func _init():
+		skill_name = "Hit"
+		value = 1.00
+		attack_scale = 2
+		damage_type = 0
+		cooldown = 3
+		
+class DefaultSpecial:
+	extends Skill
+	func _init():
+		skill_name = "Special"
+		value = rng.randf_range(0.60, 0.90)
+		attack_scale = 2
+		damage_type = 1
+		instances = 3
+		cooldown = 4
+
+
 		
 class DualStrike:
 	extends Skill
@@ -232,3 +254,14 @@ class Fury:
 		effects[3] = (stats[attack_scale] * 0.25)
 		return [false, effects]
 		pass
+		
+class Heal:
+	extends Skill
+	func _init():
+		skill_name = "Heal"
+		value = 0.10
+		attack_scale = 1
+		damage_type = -1
+		instances = 1
+		effects = []
+		cooldown = 3

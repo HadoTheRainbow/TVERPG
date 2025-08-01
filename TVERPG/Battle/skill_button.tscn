@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://do4pw171tjrsg"]
+
+[ext_resource type="Theme" uid="uid://def2sfm71jxq8" path="res://Battle/new_theme.tres" id="1_y33ys"]
+[ext_resource type="Script" path="res://Battle/skill_button.gd" id="2_a7cjl"]
+
+[node name="Skill" type="Button"]
+visible = false
+theme = ExtResource("1_y33ys")
+text = "SKILL"
+alignment = 0
+script = ExtResource("2_a7cjl")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

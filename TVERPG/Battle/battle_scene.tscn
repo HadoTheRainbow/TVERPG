@@ -1,12 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckl0ueb6annic"]
+[gd_scene load_steps=9 format=3 uid="uid://ckl0ueb6annic"]
 
 [ext_resource type="Script" path="res://Battle/battle_scene.gd" id="1_14xu1"]
 [ext_resource type="Theme" uid="uid://def2sfm71jxq8" path="res://Battle/new_theme.tres" id="1_cqg52"]
 [ext_resource type="PackedScene" uid="uid://0b4th12x8pgv" path="res://Battle/battle_window.tscn" id="1_s1sig"]
-[ext_resource type="PackedScene" uid="uid://u5bajud1api3" path="res://Battle/hero.tscn" id="3_d0ac2"]
 [ext_resource type="Script" path="res://Battle/battle_window.gd" id="3_rmica"]
-[ext_resource type="Texture2D" uid="uid://bivxti72c0fis" path="res://Assets/red battle 1.png" id="5_rh4bp"]
-[ext_resource type="Texture2D" uid="uid://b47m6jnm34alb" path="res://Assets/yeet battle 1.png" id="5_vvyrw"]
+[ext_resource type="PackedScene" uid="uid://do4pw171tjrsg" path="res://Battle/skill_button.tscn" id="5_mi62j"]
 [ext_resource type="PackedScene" uid="uid://ceksqqguocman" path="res://Battle/character.tscn" id="6_khj5v"]
 [ext_resource type="Script" path="res://Battle/debug.gd" id="9_3kmjw"]
 
@@ -90,65 +88,8 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="SkillNormal" type="Button" parent="BattleActions2/Options"]
+[node name="Skill" parent="BattleActions2/Options" instance=ExtResource("5_mi62j")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../Item")
-focus_neighbor_bottom = NodePath("../SkillSpecial")
-theme = ExtResource("1_cqg52")
-theme_override_constants/h_separation = 0
-text = "USE NORMAL"
-alignment = 0
-
-[node name="SkillSpecial" type="Button" parent="BattleActions2/Options"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../SkillNormal")
-focus_neighbor_bottom = NodePath("../Skill1")
-theme = ExtResource("1_cqg52")
-theme_override_constants/h_separation = 0
-text = "USE SPECIAL"
-alignment = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Skill1" type="Button" parent="BattleActions2/Options"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../SkillSpecial")
-focus_neighbor_bottom = NodePath("../Skill2")
-theme = ExtResource("1_cqg52")
-theme_override_constants/h_separation = 0
-text = "USE SKILL 1"
-alignment = 0
-script = SubResource("GDScript_flvgx")
-metadata/_edit_use_anchors_ = true
-
-[node name="Skill2" type="Button" parent="BattleActions2/Options"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../Skill1")
-focus_neighbor_bottom = NodePath("../Skill3")
-theme = ExtResource("1_cqg52")
-theme_override_constants/h_separation = 0
-text = "USE SKILL 2"
-alignment = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Skill3" type="Button" parent="BattleActions2/Options"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../Skill2")
-focus_neighbor_bottom = NodePath("../Item")
-theme = ExtResource("1_cqg52")
-theme_override_constants/h_separation = 0
-text = "USE SKILL 3"
-alignment = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Item" type="Button" parent="BattleActions2/Options"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../Skill3")
-focus_neighbor_bottom = NodePath("../SkillNormal")
-theme = ExtResource("1_cqg52")
-theme_override_constants/h_separation = 0
-text = "USE ITEM"
-alignment = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="Debug Options" type="VBoxContainer" parent="BattleActions2"]
 layout_mode = 1
@@ -168,7 +109,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="DebugSummonHero" type="Button" parent="BattleActions2/Debug Options"]
 layout_mode = 2
-focus_neighbor_top = NodePath("../Item")
+focus_neighbor_top = NodePath("../Start")
 focus_neighbor_bottom = NodePath("../DebugSummonEnemy")
 theme = ExtResource("1_cqg52")
 theme_override_constants/h_separation = 0
@@ -209,61 +150,22 @@ metadata/_edit_use_anchors_ = true
 [node name="DebugSwitchElement" type="Button" parent="BattleActions2/Debug Options"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Skill2")
-focus_neighbor_bottom = NodePath("../Item")
+focus_neighbor_bottom = NodePath("../Start")
 theme = ExtResource("1_cqg52")
 theme_override_constants/h_separation = 0
 text = "SWITCH DAMAGE TYPE"
 alignment = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="Item" type="Button" parent="BattleActions2/Debug Options"]
+[node name="Start" type="Button" parent="BattleActions2/Debug Options"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../DebugSwitchElement")
 focus_neighbor_bottom = NodePath("../DebugSummonHero")
 theme = ExtResource("1_cqg52")
 theme_override_constants/h_separation = 0
-text = "USE ITEM"
+text = "BEGIN BATTLE SYSTEM"
 alignment = 0
 metadata/_edit_use_anchors_ = true
-
-[node name="Heroes" type="Control" parent="."]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Hero3" parent="Heroes" instance=ExtResource("3_d0ac2")]
-layout_mode = 1
-anchor_left = 0.226229
-anchor_top = 0.241815
-anchor_right = 0.359229
-anchor_bottom = 0.478815
-offset_left = 424.951
-offset_top = 251.328
-offset_right = 931.63
-offset_bottom = 753.848
-texture_normal = ExtResource("5_rh4bp")
-metadata/_edit_use_anchors_ = true
-
-[node name="Hero2" parent="Heroes" instance=ExtResource("3_d0ac2")]
-layout_mode = 1
-anchor_left = 0.167375
-anchor_top = 0.314037
-anchor_right = 0.300375
-anchor_bottom = 0.551037
-offset_left = 314.305
-offset_top = 326.438
-offset_right = 820.985
-offset_bottom = 828.958
-texture_normal = ExtResource("5_vvyrw")
-metadata/_edit_use_anchors_ = true
-
-[node name="Hero" parent="Heroes" instance=ExtResource("3_d0ac2")]
-layout_mode = 1
-offset_left = 202.68
-offset_top = 417.92
-offset_right = 709.36
-offset_bottom = 920.44
 
 [node name="Enemies" type="Control" parent="."]
 anchors_preset = 0
@@ -289,13 +191,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_3kmjw")
 
-[connection signal="focus_entered" from="BattleActions2/Options/SkillNormal" to="BattleActions2" method="_on_skill_normal_focus_entered"]
-[connection signal="pressed" from="BattleActions2/Options/SkillNormal" to="BattleActions2" method="_on_skill_normal_pressed"]
-[connection signal="pressed" from="BattleActions2/Options/SkillSpecial" to="BattleActions2" method="_on_skill_special_pressed"]
-[connection signal="pressed" from="BattleActions2/Options/Skill1" to="BattleActions2" method="_on_skill_1_pressed"]
-[connection signal="pressed" from="BattleActions2/Options/Skill2" to="BattleActions2" method="_on_skill_2_pressed"]
-[connection signal="pressed" from="BattleActions2/Options/Skill3" to="BattleActions2" method="_on_skill_3_pressed"]
 [connection signal="pressed" from="BattleActions2/Debug Options/DebugSummonHero" to="BattleActions2" method="_on_debug_summon_hero_pressed"]
 [connection signal="pressed" from="BattleActions2/Debug Options/DebugSummonEnemy" to="BattleActions2" method="_on_debug_summon_enemy_pressed"]
 [connection signal="pressed" from="BattleActions2/Debug Options/DebugSwitchChar" to="BattleActions2" method="_on_debug_switch_char_pressed"]
 [connection signal="pressed" from="BattleActions2/Debug Options/DebugSwitchElement" to="BattleActions2" method="_on_debug_switch_element_pressed"]
+[connection signal="pressed" from="BattleActions2/Debug Options/Start" to="BattleActions2" method="_on_start_pressed"]

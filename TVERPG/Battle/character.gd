@@ -121,9 +121,17 @@ func _process(delta):
 				die.emit(e_order, designation, id)
 				self.queue_free()
 	
+func receive_attack(data: Array):
+	if data.size() > 0:
+		if typeof(data) == TYPE_ARRAY:
+			if data[1] == -1:
+				_heal(data[0])
+			else:
+				_damage(data[0], data[1])
 
-func _damage(target, value, dam_type):
-	if target == id:
+
+func _damage(value, dam_type):
+	if id == id:
 		var damage_type = dam_type
 		if damage_type == 9:
 			damage_type = rng.randi_range(0, 8)
@@ -150,8 +158,8 @@ func _damage(target, value, dam_type):
 					flash.play("die")
 		else:
 			pass
-func _heal(target, value):
-	if target == id:
+func _heal(value):
+	if id == id:
 		var healt = stats.heal(value)
 		summon_damage_num(healt, true, 0)
 		print("HP of enemy " + str(id) +" increased to "+ str(stats.hp))
