@@ -1,4 +1,4 @@
-extends Node
+extends CharacterEntity
 class_name Skill
 
 #DAMAGE TYPES
@@ -26,7 +26,7 @@ class_name Skill
 #self = 7
 #custom = 8
 
-var rng = RandomNumberGenerator.new()
+#var rng = RandomNumberGenerator.new()
 
 var skill_name: String
 var value = 0
@@ -41,37 +41,57 @@ var cooldown = 0
 var energy_remain = 0
 var effect_scale_stat
 
+var skill_owner
+
 var hit_mod
 var crit_mod
 var crit_d_mod
 
+#var character
+
 func call_skill(stats):
 	trigger_cooldown()
 	if effects.size() == 0:
-		return [value * stats[attack_scale], damage_type]
+		return [int(value * stats[attack_scale]), damage_type]
 	else:
 		var arr = [value * stats[attack_scale], damage_type]
 		export_effects = []
 		for i in effects:
-			export_effects.append(roll_effect(i,0))
-		arr.append(export_effects)
+			var temp_var = roll_effect(i,0)
+			if temp_var != null:
+				export_effects.append(temp_var)
+		if export_effects.size() > 0:
+			arr.append(export_effects)
+		print(arr)
 		return arr
 		
 func roll_effect(data, modifier):
-	if data[1] + modifier <= rng.randf_range(0.00, 1.00):
+	if data[1] + modifier >= rng.randf_range(0.00, 1.00):
 		return [data[0], data[2], data[3]]
+	else:
+		return 
+
+func get_scaling_value(stat, modifier):
+	print(skill_owner)
+	if typeof(skill_owner) != TYPE_NIL:
+		if typeof(skill_owner.get_stat(stat)) == TYPE_INT:
+			return skill_owner.get_stat(stat) * modifier
 	pass
+
+func calculate_value():
+	return 
 	
 func energy_change(v):
 	energy_remain -= v
 	if energy_remain < 0:
 		energy_remain = 0
 func trigger_cooldown():
-	energy_remain = cooldown
+	energy_remain = cooldown + 1
 	
 class Normal:
 	extends Skill
-	func _init(type):
+	func _init(type, connection):
+		skill_owner = connection
 		skill_name = "Normal"
 		value = 0.50
 		attack_scale = 2
@@ -81,7 +101,8 @@ class Normal:
 
 class FlameBlade:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Flame Blade"
 		value = 0.60
 		attack_scale = 2
@@ -89,9 +110,33 @@ class FlameBlade:
 		effects = []
 		cooldown = 2
 		
+class VenomousBite:
+	extends Skill
+	func _init(connection):
+		skill_owner = connection
+		skill_name = "Venomous Bite"
+		value = 0.60
+		attack_scale = 2
+		damage_type = 3
+		effects = [["Poison", 1.00, 2, ]]
+		cooldown = 5
+
+class InfinitePain:
+	extends Skill
+	func _init(connection):
+		skill_owner = connection
+		skill_name = "Infinite Pain"
+		value = 0.60
+		attack_scale = 2
+		damage_type = 1
+		instances = 40
+		effects = []
+		cooldown = 2
+
 class DefaultHit:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Hit"
 		value = 1.00
 		attack_scale = 2
@@ -100,7 +145,8 @@ class DefaultHit:
 		
 class DefaultSpecial:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Special"
 		value = rng.randf_range(0.60, 0.90)
 		attack_scale = 2
@@ -112,17 +158,20 @@ class DefaultSpecial:
 		
 class DualStrike:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Dual Strike"
 		value = 0.40
 		attack_scale = 2
 		damage_type = 0
+		instances = 2
 		effects = []
-		cooldown = 2
+		cooldown = 7
 		
 class BlindingSlash:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Blinding Slash"
 		value = 1.00
 		attack_scale = 2
@@ -133,7 +182,8 @@ class BlindingSlash:
 
 class DeepBreath:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Deep Breath"
 		value = 0.00
 		attack_scale = 0
@@ -144,7 +194,8 @@ class DeepBreath:
 
 class Firecracker:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Firecracker"
 		value = 0.40
 		attack_scale = 2
@@ -157,7 +208,8 @@ class Firecracker:
 		
 class Frostbite:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Frostbite"
 		value = 0.80
 		attack_scale = 2
@@ -168,7 +220,8 @@ class Frostbite:
 
 class SimpleStrike:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Simple Strike"
 		value = 0.60
 		attack_scale = 2
@@ -179,7 +232,8 @@ class SimpleStrike:
 		
 class HeavyHit:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Dual Strike"
 		value = 1.10
 		attack_scale = 2
@@ -191,7 +245,8 @@ class HeavyHit:
 		
 class MagicStrike:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Dual Strike"
 		value = 1.10
 		attack_scale = 2
@@ -204,7 +259,8 @@ class MagicStrike:
 			
 class RedRail:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Red Rail"
 		value = 3.00
 		attack_scale = 2
@@ -216,7 +272,8 @@ class RedRail:
 		pass
 class Overclock:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Overclock"
 		value = 0.00
 		attack_scale = 2
@@ -226,22 +283,24 @@ class Overclock:
 		target_type = 5
 		cooldown = 4
 	func call_skill(stats):
-		effects[3] = (attack_scale * 0.3)
-		return [false, effects]
-		pass
+		trigger_cooldown()
+		effects[0][3] = (attack_scale * 0.3)
+		return [false, false, effects]
 class Blaze:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Blaze"
 		value = 0.40
 		attack_scale = 2
 		damage_type = 1
 		instances = 1
-		effects = [["OnFire", 0.20, 2, effect_scale_stat]]
+		effects = [["OnFire", 1.00, 2, get_scaling_value("attack", 0.3)]]
 		cooldown = 2
 class Fury:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Fury"
 		value = 0.00
 		attack_scale = 2
@@ -251,13 +310,15 @@ class Fury:
 		target_type = 7
 		cooldown = 5
 	func call_skill(stats):
-		effects[3] = (stats[attack_scale] * 0.25)
-		return [false, effects]
+		trigger_cooldown()
+		effects[0][3] = (stats[attack_scale] * 0.25)
+		return [false, false, effects]
 		pass
 		
 class Heal:
 	extends Skill
-	func _init():
+	func _init(connection):
+		skill_owner = connection
 		skill_name = "Heal"
 		value = 0.10
 		attack_scale = 1
