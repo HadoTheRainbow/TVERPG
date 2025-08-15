@@ -1,5 +1,9 @@
 extends Button
 
+class_name CharacterEntity
+
+@onready var effect_name_dict = EffectDict.new()
+
 signal change_max
 signal target(identifier: int)
 signal die(value)
@@ -43,7 +47,7 @@ var dam_display
 var display2
 var id: int
 var entity_id: int
-var stats
+var stats = true
 var max_enemies: int
 var max_heroes: int
 var designation: bool
@@ -62,9 +66,11 @@ const RIGHT_BOUND = 1000
 func determine_stats(a):
 	var b = EntitiesDict.new()
 	stats = b.character_list[a]
+	stats.connector = self
 	stats.id = id
 	stats.is_hero = designation
 	stats.lvl = level
+	stats.connector = self
 	stats.reload()
 
 # Called when the node enters the scene tree for the first time.
@@ -123,11 +129,29 @@ func _process(delta):
 	
 func receive_attack(data: Array):
 	if data.size() > 0:
-		if typeof(data) == TYPE_ARRAY:
+		if typeof(data[0]) == TYPE_INT:
 			if data[1] == -1:
 				_heal(data[0])
 			else:
 				_damage(data[0], data[1])
+			var x = 2
+			for i in (data.size() - 2):
+				obtain_effect(data[x][0], data[x][1], data[0][1])
+				print("effect given")
+				x += 1
+				
+func obtain_effect(effect_name, duration, value):
+	for i in stats.status_effects:
+		if i.effect_name == effect_name:
+			i.effect_instances.append([value, duration])
+			print("effects added")
+			return
+	stats.status_effects.append(effect_name_dict.effect_list[effect_name])
+	print("new effects added")
+	
+	
+	
+	pass
 
 
 func _damage(value, dam_type):
@@ -178,6 +202,7 @@ func _heal(value):
 				flash.play("die")
 
 func get_stat(value):
+	if typeof(stats) != TYPE_BOOL:
 		return stats.get_stat(value)
 
 
@@ -211,4 +236,3 @@ func summon_damage_num(dam, is_heal, type):
 		num.get_node("PathFollow2D/RichTextLabel").set("theme_override_colors/font_outline_color",DAMAGE_COLORS_OUTER[type])
 		#print(DAMAGE_TYPES[type])
 	add_child(num)
-
