@@ -42,4 +42,3 @@ func _on_character_animate_num(val):
 	#delta_offset = 0
 	#print("reset!")
 	pass
-

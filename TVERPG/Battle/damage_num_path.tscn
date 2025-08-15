@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ivrg0mxx4tq8"]
 
-[ext_resource type="Script" path="res://Battle/damage_num_path.gd" id="1_3ua84"]
+[ext_resource type="Script" uid="uid://cg2f83buviscw" path="res://Battle/damage_num_path.gd" id="1_3ua84"]
 [ext_resource type="FontFile" uid="uid://dbjh833l03213" path="res://Assets/VCR_OSD_MONO_1.001.ttf" id="2_o35by"]
 
 [sub_resource type="Curve2D" id="Curve2D_0yfyb"]

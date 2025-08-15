@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://ceksqqguocman"]
 
 [ext_resource type="Theme" uid="uid://def2sfm71jxq8" path="res://Battle/new_theme.tres" id="1_bg0fd"]
-[ext_resource type="Script" path="res://Battle/character.gd" id="2_yv0dg"]
-[ext_resource type="Shader" path="res://Battle/character.gdshader" id="3_ly2ui"]
+[ext_resource type="Script" uid="uid://s2m8bxis0n2l" path="res://Battle/character.gd" id="2_yv0dg"]
+[ext_resource type="Shader" uid="uid://dceb5porc8usk" path="res://Battle/character.gdshader" id="3_ly2ui"]
 [ext_resource type="Texture2D" uid="uid://87ot7xs7mrmn" path="res://Assets/dead.png" id="4_enuqp"]
 [ext_resource type="PackedScene" uid="uid://ivrg0mxx4tq8" path="res://Battle/damage_num_path.tscn" id="4_s0loq"]
 
@@ -10,7 +10,7 @@
 resource_local_to_scene = true
 shader = ExtResource("3_ly2ui")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_value = null
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="Animation" id="Animation_7fjkt"]
 length = 0.001
@@ -160,10 +160,10 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i56uv"]
 resource_local_to_scene = true
 _data = {
-"RESET": SubResource("Animation_7fjkt"),
-"die": SubResource("Animation_b8j0p"),
-"flash": SubResource("Animation_egjji"),
-"flash_alt": SubResource("Animation_jfmsw")
+&"RESET": SubResource("Animation_7fjkt"),
+&"die": SubResource("Animation_b8j0p"),
+&"flash": SubResource("Animation_egjji"),
+&"flash_alt": SubResource("Animation_jfmsw")
 }
 
 [node name="Character" type="Button"]
@@ -190,7 +190,7 @@ flip_h = true
 
 [node name="Flash" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_i56uv")
+&"": SubResource("AnimationLibrary_i56uv")
 }
 
 [node name="Path2D" parent="." instance=ExtResource("4_s0loq")]
