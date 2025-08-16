@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxmy1kfas3712"]
+
+[ext_resource type="Script" uid="uid://dxryhxkqfnxdy" path="res://Map/Path.gd" id="1_5gqws"]
+[ext_resource type="Texture2D" uid="uid://dr3fso4yfyt0b" path="res://Assets/MapAssets/150150Swap.png" id="2_mccv4"]
+
+[node name="Swap" type="Node2D"]
+script = ExtResource("1_5gqws")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mccv4")

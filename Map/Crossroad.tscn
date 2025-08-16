@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwn7kfhgw5wtk"]
+
+[ext_resource type="Script" uid="uid://dxryhxkqfnxdy" path="res://Map/Path.gd" id="1_w0tv1"]
+[ext_resource type="Texture2D" uid="uid://cb8wll3uhwys5" path="res://Assets/MapAssets/150150Crossroad.png" id="2_3mqtu"]
+
+[node name="Crossroad" type="Node2D"]
+script = ExtResource("1_w0tv1")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Corridor"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3mqtu")
