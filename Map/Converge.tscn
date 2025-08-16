@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2rqqdx01e68h"]
+
+[ext_resource type="Script" path="res://Map/Path.gd" id="1_u2h8v"]
+[ext_resource type="Texture2D" uid="uid://de78eclsyser0" path="res://Assets/150150Converge.png" id="1_xaxis"]
+
+[node name="Converge" type="Node2D"]
+script = ExtResource("1_u2h8v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xaxis")
