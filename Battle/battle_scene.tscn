@@ -1,0 +1,198 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckl0ueb6annic"]
+
+[ext_resource type="Script" uid="uid://cl8yognyb06sw" path="res://Battle/battle_scene.gd" id="1_14xu1"]
+[ext_resource type="Theme" uid="uid://def2sfm71jxq8" path="res://Battle/new_theme.tres" id="1_cqg52"]
+[ext_resource type="PackedScene" uid="uid://0b4th12x8pgv" path="res://Battle/battle_window.tscn" id="1_s1sig"]
+[ext_resource type="Script" uid="uid://dxtex58u4dioc" path="res://Battle/battle_window.gd" id="3_rmica"]
+[ext_resource type="PackedScene" uid="uid://do4pw171tjrsg" path="res://Battle/skills/skill_button.tscn" id="5_mi62j"]
+[ext_resource type="PackedScene" uid="uid://ceksqqguocman" path="res://Battle/characters/character.tscn" id="6_khj5v"]
+[ext_resource type="Script" uid="uid://b0m6c6wfnl6qh" path="res://Battle/debug.gd" id="9_3kmjw"]
+
+[sub_resource type="GDScript" id="GDScript_flvgx"]
+script/source = "extends Button
+
+
+"
+
+[node name="BattleScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_14xu1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.11875
+anchor_top = 0.681481
+anchor_right = 0.885938
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_cqg52")
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BattleWindow" parent="HBoxContainer" instance=ExtResource("1_s1sig")]
+layout_mode = 2
+
+[node name="BattleActions" parent="HBoxContainer" instance=ExtResource("1_s1sig")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.681818
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_cqg52")
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BattleWindow" parent="HBoxContainer2" instance=ExtResource("1_s1sig")]
+visible = false
+layout_mode = 2
+
+[node name="BattleActions2" parent="." instance=ExtResource("1_s1sig")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.276
+anchor_top = 0.681
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.920044
+offset_top = 0.519958
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_rmica")
+
+[node name="Options" type="VBoxContainer" parent="BattleActions2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.058
+anchor_top = 0.078
+anchor_right = 0.917
+anchor_bottom = 0.858
+offset_left = -0.172005
+offset_top = 0.167995
+offset_right = 0.0219116
+offset_bottom = -0.152069
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Skill" parent="BattleActions2/Options" instance=ExtResource("5_mi62j")]
+layout_mode = 2
+
+[node name="Debug Options" type="VBoxContainer" parent="BattleActions2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.12856
+anchor_top = -2.10308
+anchor_right = 0.0230568
+anchor_bottom = -1.06708
+offset_left = 0.0703735
+offset_top = -0.0772924
+offset_right = -0.0884705
+offset_bottom = 4.00002
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugSummonHero" type="Button" parent="BattleActions2/Debug Options"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Start")
+focus_neighbor_bottom = NodePath("../DebugSummonEnemy")
+theme = ExtResource("1_cqg52")
+theme_override_constants/h_separation = 0
+text = "SUMMON HERO"
+alignment = 0
+
+[node name="DebugSummonEnemy" type="Button" parent="BattleActions2/Debug Options"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../DebugSummonHero")
+focus_neighbor_bottom = NodePath("../DebugSwitchChar")
+theme = ExtResource("1_cqg52")
+theme_override_constants/h_separation = 0
+text = "SUMMON ENEMY"
+alignment = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugSwitchChar" type="Button" parent="BattleActions2/Debug Options"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../DebugSummonEnemy")
+focus_neighbor_bottom = NodePath("../Skill2")
+theme = ExtResource("1_cqg52")
+theme_override_constants/h_separation = 0
+text = "SWITCH CHAR ID"
+alignment = 0
+script = SubResource("GDScript_flvgx")
+metadata/_edit_use_anchors_ = true
+
+[node name="Skill2" type="Button" parent="BattleActions2/Debug Options"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../DebugSwitchChar")
+focus_neighbor_bottom = NodePath("../DebugSwitchElement")
+theme = ExtResource("1_cqg52")
+theme_override_constants/h_separation = 0
+text = "RESET BATTLE"
+alignment = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugSwitchElement" type="Button" parent="BattleActions2/Debug Options"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Skill2")
+focus_neighbor_bottom = NodePath("../Start")
+theme = ExtResource("1_cqg52")
+theme_override_constants/h_separation = 0
+text = "SWITCH DAMAGE TYPE"
+alignment = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Button" parent="BattleActions2/Debug Options"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../DebugSwitchElement")
+focus_neighbor_bottom = NodePath("../DebugSummonHero")
+theme = ExtResource("1_cqg52")
+theme_override_constants/h_separation = 0
+text = "BEGIN BATTLE SYSTEM"
+alignment = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Enemies" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("6_khj5v")]
+visible = false
+layout_mode = 1
+anchor_left = 0.708333
+anchor_top = 0.32963
+anchor_right = 0.841271
+anchor_bottom = 0.566926
+offset_left = 1331.67
+offset_top = 342.815
+offset_right = 1838.35
+offset_bottom = 845.323
+script = null
+
+[node name="Debug handler" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_3kmjw")
+
+[connection signal="pressed" from="BattleActions2/Debug Options/DebugSummonHero" to="BattleActions2" method="_on_debug_summon_hero_pressed"]
+[connection signal="pressed" from="BattleActions2/Debug Options/DebugSummonEnemy" to="BattleActions2" method="_on_debug_summon_enemy_pressed"]
+[connection signal="pressed" from="BattleActions2/Debug Options/DebugSwitchChar" to="BattleActions2" method="_on_debug_switch_char_pressed"]
+[connection signal="pressed" from="BattleActions2/Debug Options/DebugSwitchElement" to="BattleActions2" method="_on_debug_switch_element_pressed"]
+[connection signal="pressed" from="BattleActions2/Debug Options/Start" to="BattleActions2" method="_on_start_pressed"]

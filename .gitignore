@@ -1,0 +1,22 @@
+# Godot-specific
+.import/
+.export/
+*.godot
+
+# Builds/Exports
+export/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# Godot Mono / C#
+.mono/
+data.mono/

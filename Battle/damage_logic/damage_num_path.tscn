@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://ivrg0mxx4tq8"]
+
+[ext_resource type="Script" uid="uid://cg2f83buviscw" path="res://Battle/damage_logic/damage_num_path.gd" id="1_3ua84"]
+[ext_resource type="FontFile" uid="uid://dbjh833l03213" path="res://Assets/VCR_OSD_MONO_1.001.ttf" id="2_o35by"]
+
+[sub_resource type="Curve2D" id="Curve2D_0yfyb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 9.53741, -10.8369, 0, 0, 0, 0, 2.60114, -24.5915, 0, 0, 0, 0, -11.705, -32.094, 0, 0, 0, 0, -23.4101, -24.1747, 0, 0, 0, 0, -32.0804, -9.58653)
+}
+point_count = 5
+
+[sub_resource type="Theme" id="Theme_ohlxd"]
+
+[node name="Path2D" type="Path2D"]
+position = Vector2(-95.1211, 76.3195)
+scale = Vector2(4.6134, 4.7984)
+curve = SubResource("Curve2D_0yfyb")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(9.53741, -10.8369)
+rotation = -6.28319
+rotates = false
+script = ExtResource("1_3ua84")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PathFollow2D"]
+clip_contents = false
+anchors_preset = -1
+anchor_left = -0.255112
+anchor_top = -0.172005
+anchor_right = 1.00454
+anchor_bottom = 0.399971
+offset_left = 27.9468
+offset_top = -17.4658
+offset_right = 27.9468
+offset_bottom = -17.4658
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.272)
+theme = SubResource("Theme_ohlxd")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 40
+theme_override_fonts/normal_font = ExtResource("2_o35by")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "eee"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+tab_size = 0
+visible_characters_behavior = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="_Timer_241882" type="Timer" parent="PathFollow2D"]
+wait_time = 0.2
+one_shot = true

@@ -1,4 +1,0 @@
-[
-["Fireball", "fire", 90, 0.70, "random_target_enemy", 3, "poison", 2], 
-["Void Slash", "void", 90, 1.50, "all_target_enemy", 1, "none", 6]
-]
