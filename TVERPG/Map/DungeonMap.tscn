@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8vpisyxg7fda"]
+
+[ext_resource type="Script" uid="uid://dlnthap1imts8" path="res://Map/DungeonMap.gd" id="1_d0jxp"]
+[ext_resource type="Texture2D" uid="uid://stiwbosrhj7i" path="res://Assets/MapAssets/150150Beginning.png" id="3_hw16k"]
+[ext_resource type="Script" uid="uid://by1jd53dqqjhl" path="res://Map/Camera2D.gd" id="3_ufugu"]
+[ext_resource type="Script" uid="uid://dl00h516o3uv4" path="res://Map/Generation.gd" id="3_yo06j"]
+[ext_resource type="Script" uid="uid://rxyxfoppea3a" path="res://Map/CharacterBody2D.gd" id="4_hybly"]
+[ext_resource type="PackedScene" uid="uid://bjf2gf37kfknc" path="res://Map/Room.tscn" id="6_fdfla"]
+
+[node name="DungeonMap" type="Node2D"]
+script = ExtResource("1_d0jxp")
+ChosenType = 1
+Lenght = 7
+Lanes = 7
+
+[node name="GenerateDungeon" type="Button" parent="."]
+offset_left = 110.94
+offset_top = 38.945
+offset_right = 196.24
+offset_bottom = 95.55
+text = "Generate"
+script = ExtResource("3_yo06j")
+
+[node name="BeginningRoom" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BeginningRoom"]
+visible = false
+texture = ExtResource("3_hw16k")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(480, 360)
+script = ExtResource("4_hybly")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position_smoothing_enabled = true
+script = ExtResource("3_ufugu")
+
+[node name="Room" parent="." instance=ExtResource("6_fdfla")]
+position = Vector2(110.94, 38.945)
+
+[connection signal="pressed" from="GenerateDungeon" to="." method="_on_generate_dungeon_pressed"]

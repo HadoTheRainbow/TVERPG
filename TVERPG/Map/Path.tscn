@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://8o2pao08pmsk"]
+
+[ext_resource type="Script" uid="uid://dgxpobenc1t66" path="res://Map/Connector.gd" id="1_3h03l"]
+[ext_resource type="Texture2D" uid="uid://87ot7xs7mrmn" path="res://Assets/dead.png" id="2_8ok1e"]
+
+[node name="Connector" type="Node2D"]
+script = ExtResource("1_3h03l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8ok1e")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.515, 0.515)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://drq4bqx0gf1b4"]
+
+[ext_resource type="Script" uid="uid://dxryhxkqfnxdy" path="res://Map/Path.gd" id="1_mc2mv"]
+[ext_resource type="Texture2D" uid="uid://qaww8npmhgg2" path="res://Assets/MapAssets/150150Corridor.png" id="2_8taec"]
+
+[node name="Corridor" type="Node2D"]
+script = ExtResource("1_mc2mv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8taec")
